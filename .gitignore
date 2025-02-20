@@ -1,0 +1,13 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+# Python cache files and virtual environments
+__pycache__/
+*.pyc
+env/
+venv/

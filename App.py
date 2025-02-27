@@ -2,31 +2,50 @@ import streamlit as st
 from utils.model_trainer import get_trained_model
 from utils.model_saver import auto_save_best_model, load_best_model
 
+def model_loader(best_model, best_metrics, model, metrics, label: str):
+    if best_model is not None:
+        if metrics["F1 Score"] > best_metrics["F1 Score"]:
+            st.sidebar.info(f"Trained and saved better model than before for {label}.")
+            auto_save_best_model(model, metrics, f"/home/vacur/ML/TCD/models/best_model_{label}.pkl")
+        else:
+            #st.sidebar.info(f"Using best saved model for {label}.") 
+            model, metrics = best_model, best_metrics
+    else:
+        st.sidebar.info(f"No best model found for {label}. Training new model.")
+        auto_save_best_model(model, metrics, f"/home/vacur/ML/TCD/models/best_model_{label}.pkl")
+    return model, metrics
+
+def metrics(metrics, label: str):
+    print(f"**Accuracy for {label}:** {metrics['Accuracy'] * 100:.2f}%")
+    print(f"**Precision for {label}:** {metrics['Precision'] * 100:.2f}%")
+    print(f"**Recall for {label}:** {metrics['Recall'] * 100:.2f}%")
+    print(f"**F1 Score for {label}:** {metrics['F1 Score'] * 100:.2f}%\n")
+    #st.sidebar.markdown("---")
+
 def main():
     st.title("Toxic Comment Detector")
     st.markdown("""
     This application is using manual implementation of Bagging Algorithm with Naive Bayer Classifier for toxicity detection.
     """)
 
-    best_model, best_metrics = load_best_model("best_model.pkl")
-    model, metrics = get_trained_model()
-    
-    if best_model is not None:
-        if metrics["F1 Score"] > best_metrics["F1 Score"]:
-            st.sidebar.info("Trained and saved better model than before.")
-            auto_save_best_model(model, metrics)
-        else:
-            st.sidebar.info("Using best saved model.") 
-            model, metrics = best_model, best_metrics
-    else:
-        st.sidebar.info("No best model found. Training new model.")
-        auto_save_best_model(model, metrics)
+    best_model_Toxic, best_metrics_Toxic = load_best_model("/home/vacur/ML/TCD/models/best_model_IsToxic.pkl")
+    modelToxic, metricsToxic = get_trained_model("IsToxic")
 
-    st.sidebar.header("Model Metrics")
-    st.sidebar.write(f"**Accuracy:** {metrics['Accuracy'] * 100:.2f}%")
-    st.sidebar.write(f"**Precision:** {metrics['Precision'] * 100:.2f}%")
-    st.sidebar.write(f"**Recall:** {metrics['Recall'] * 100:.2f}%")
-    st.sidebar.write(f"**F1 Score:** {metrics['F1 Score'] * 100:.2f}%")
+    best_model_Provocative, best_metrics_Provocative = load_best_model("/home/vacur/ML/TCD/models/best_model_IsProvocative.pkl")
+    modelProvocative, metricsProvocative = get_trained_model("IsProvocative")
+
+    best_model_Abusive, best_metrics_Abusive = load_best_model("/home/vacur/ML/TCD/models/best_model_IsAbusive.pkl")
+    modelAbusive, metricsAbusive = get_trained_model("IsAbusive")
+    
+    modelToxic, metricsToxic = model_loader(best_model_Toxic, best_metrics_Toxic, modelToxic, metricsToxic, "IsToxic")
+    modelProvocative, metricsProvocative = model_loader(best_model_Provocative, best_metrics_Provocative, modelProvocative, metricsProvocative, "IsProvocative")
+    modelAbusive, metricsAbusive = model_loader(best_model_Abusive, best_metrics_Abusive, modelAbusive, metricsAbusive, "IsAbusive")
+
+    #st.sidebar.header("Model Metrics")
+    metrics(metricsToxic, "IsToxic")
+    metrics(metricsProvocative, "IsProvocative")
+    metrics(metricsAbusive, "IsAbusive")
+    print("-----------------------------------")
 
     st.markdown("---")
     st.subheader("Check your comment for toxicity")
@@ -35,11 +54,17 @@ def main():
         if comment.strip() == "":
             st.error("Please write comment")
         else:
-            prediction = model.predict([comment])
-            if prediction[0] == 1 or prediction[0] == "1":
+            predictionToxic = modelToxic.predict([comment])
+            predictionProvocative = modelProvocative.predict([comment])
+            predictionAbusive = modelAbusive.predict([comment])
+            if predictionToxic[0] == 1 or predictionToxic[0] == "1":
                 st.error("Commect is **TOXIC** :rotating_light:")   
             else:
                 st.success("Comment **is not toxic** :white_check_mark:")
+            if predictionAbusive[0] == 1 or predictionAbusive[0] == "1":
+                st.error("Commect is **ABUSIVE** :rotating_light:")
+            if predictionProvocative[0] == 1 or predictionProvocative[0] == "1":
+                st.error("Commect is **PROVOCATIVE** :rotating_light:")
 
 
 if __name__ == '__main__':

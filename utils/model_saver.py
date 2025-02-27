@@ -1,7 +1,7 @@
 import pickle
 import streamlit as st
 
-def auto_save_best_model(model, metrics, model_filename="best_model.pkl"):
+def auto_save_best_model(model, metrics, model_filename):
     """
     Automaticky uloží model na disk, ak je lepší ako najlepší uložený model.
     Funkcia bude zmazana neskôr.

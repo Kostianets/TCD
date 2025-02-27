@@ -1,6 +1,6 @@
 import random
-from models.bagging import BaggingClassifier
-from models.naive_bayes import SimpleNaiveBayesClassifier
+from algorithm.bagging import BaggingClassifier
+from algorithm.naive_bayes import SimpleNaiveBayesClassifier
 from utils.data_loader import load_data
 from metrics.evaluation import accuracy_metric, precision_metric, recall_metric, f1_metric
 
@@ -8,11 +8,10 @@ def train_model(texts, labels):
     """
     Trénuje model na základe zoznamu textov a príslušných labelov.
     """
-    # Rozdelíme dáta na 80% trénovacie a 20% testovacie (náhodne)
     combined = list(zip(texts, labels))
     random.shuffle(combined)
     texts_shuffled, labels_shuffled = zip(*combined)
-    split_index = int(0.8 * len(texts_shuffled))
+    split_index = int(0.7 * len(texts_shuffled))
     X_train = list(texts_shuffled[:split_index])
     y_train = list(labels_shuffled[:split_index])
     X_test = list(texts_shuffled[split_index:])
@@ -34,10 +33,10 @@ def train_model(texts, labels):
     }
     return model, metrics
 
-def get_trained_model():
+def get_trained_model(label: str):
     """
     Načíta dáta, natrénuje model a vráti natrénovaný model a metriky.
     """
-    texts, labels = load_data("IsToxic")
+    texts, labels = load_data(label)
     model, metrics = train_model(texts, labels)
     return model, metrics

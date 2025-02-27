@@ -28,13 +28,13 @@ def main():
     This application is using manual implementation of Bagging Algorithm with Naive Bayer Classifier for toxicity detection.
     """)
 
-    best_model_Toxic, best_metrics_Toxic = load_best_model("/home/vacur/ML/TCD/models/best_model_IsToxic.pkl")
+    best_model_Toxic, best_metrics_Toxic = load_best_model(".../TCD/models/best_model_IsToxic.pkl")
     modelToxic, metricsToxic = get_trained_model("IsToxic")
 
-    best_model_Provocative, best_metrics_Provocative = load_best_model("/home/vacur/ML/TCD/models/best_model_IsProvocative.pkl")
+    best_model_Provocative, best_metrics_Provocative = load_best_model(".../TCD/models/best_model_IsProvocative.pkl")
     modelProvocative, metricsProvocative = get_trained_model("IsProvocative")
 
-    best_model_Abusive, best_metrics_Abusive = load_best_model("/home/vacur/ML/TCD/models/best_model_IsAbusive.pkl")
+    best_model_Abusive, best_metrics_Abusive = load_best_model(".../TCD/models/best_model_IsAbusive.pkl")
     modelAbusive, metricsAbusive = get_trained_model("IsAbusive")
     
     modelToxic, metricsToxic = model_loader(best_model_Toxic, best_metrics_Toxic, modelToxic, metricsToxic, "IsToxic")

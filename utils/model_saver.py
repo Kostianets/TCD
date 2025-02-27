@@ -3,7 +3,8 @@ import streamlit as st
 
 def auto_save_best_model(model, metrics, model_filename="best_model.pkl"):
     """
-    Automatically saves the current model if its F1 Score is better than the saved best model.
+    Automaticky uloží model na disk, ak je lepší ako najlepší uložený model.
+    Funkcia bude zmazana neskôr.
     """
     try:
         with open(model_filename, "rb") as f:

@@ -5,6 +5,9 @@ from utils.data_loader import load_data
 from metrics.evaluation import accuracy_metric, precision_metric, recall_metric, f1_metric
 
 def train_model(texts, labels):
+    """
+    Trénuje model na základe zoznamu textov a príslušných labelov.
+    """
     # Rozdelíme dáta na 80% trénovacie a 20% testovacie (náhodne)
     combined = list(zip(texts, labels))
     random.shuffle(combined)
@@ -32,6 +35,9 @@ def train_model(texts, labels):
     return model, metrics
 
 def get_trained_model():
-    texts, labels = load_data()
+    """
+    Načíta dáta, natrénuje model a vráti natrénovaný model a metriky.
+    """
+    texts, labels = load_data("IsToxic")
     model, metrics = train_model(texts, labels)
     return model, metrics

@@ -17,7 +17,6 @@ The project:
 1. **Data Loading**  
    - **File:** `utils/data_loader.py`  
    - **Description:** Loads data from the CSV file (`data/youtoxic_english_1000.csv`) and extracts the text and labels for a specified category.
-   - **Usage:** I'm using 4 columns from dataset: Text, IsToxic, IsAbusive, IsProvocative. If you want to use your dataset you will need to change code or be sure there is same attributes.
 
 2. **Base Classification Model**  
    - **File:** `algorithm/naive_bayes.py`  
@@ -47,7 +46,7 @@ The project:
 6. **Model Saving and Loading**  
    - **File:** `utils/model_saver.py`  
    - **Description:**  
-     - Provides functions to automatically save the model if it outperforms the previous best (using F1 score) and load the best model.
+     - Provides functions to automatically save the models if it outperforms the previous best (using F1 score) and load the best model. All models is stored in `models` directory.
 
 7. **Application Interface**  
    - **File:** `App.py`  
@@ -66,4 +65,12 @@ The project:
 
    For installing dependencies on **Linux:**
    ```bash
-   pip install pandas streamlit
+   pip install -r requirements.txt
+
+2. **Data**
+   My program is using 4 attributes in dataset: Text, IsToxic, IsAbusive, IsProvocative. If you want to use your dataset put it in `data` and make sure there is same columns or change code in `data_loader.py`.
+
+3. **Run the App**
+    **Linux:**
+    ```bash
+    streamlit run App.py

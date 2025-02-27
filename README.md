@@ -16,6 +16,7 @@ The project:
 1. **Data Loading**  
    - **File:** `utils/data_loader.py`  
    - **Description:** Loads data from the CSV file (`data/youtoxic_english_1000.csv`) and extracts the text and labels for a specified category.
+   - **Usage:** I'm using 4 columns from dataset: Text, IsToxic, IsAbusive, IsProvocative. If you want to use your dataset you will need to change code or be sure there is same attributes.
 
 2. **Base Classification Model**  
    - **File:** `algorithm/naive_bayes.py`  
@@ -62,6 +63,6 @@ The project:
    - pandas
    - streamlit
 
-   Install dependencies, for example:
+   Install dependencies:
    ```bash
    pip install pandas streamlit

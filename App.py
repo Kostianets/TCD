@@ -1,26 +1,33 @@
+import os
 import streamlit as st
 from utils.model_trainer import get_trained_model
 from utils.model_saver import auto_save_best_model, load_best_model
 
 def model_loader(best_model, best_metrics, model, metrics, label: str):
+    """
+    Loads the best model if it exists, otherwise trains a new model.
+    """
     if best_model is not None:
         if metrics["F1 Score"] > best_metrics["F1 Score"]:
             st.sidebar.info(f"Trained and saved better model than before for {label}.")
-            auto_save_best_model(model, metrics, f".../TCD/models/best_model_{label}.pkl")
+            auto_save_best_model(model, metrics, f"{os.getcwd()}/models/best_model_{label}.pkl")
         else:
             #st.sidebar.info(f"Using best saved model for {label}.") 
             model, metrics = best_model, best_metrics
     else:
         st.sidebar.info(f"No best model found for {label}. Training new model.")
-        auto_save_best_model(model, metrics, f".../TCD/models/best_model_{label}.pkl")
+        auto_save_best_model(model, metrics, f"{os.getcwd()}/models/best_model_{label}.pkl")
+        #print(f"{os.getcwd()}/models/best_model_{label}.pkl")
     return model, metrics
 
 def metrics(metrics, label: str):
+    """
+    Prints the metrics for the given label.
+    """
     print(f"**Accuracy for {label}:** {metrics['Accuracy'] * 100:.2f}%")
     print(f"**Precision for {label}:** {metrics['Precision'] * 100:.2f}%")
     print(f"**Recall for {label}:** {metrics['Recall'] * 100:.2f}%")
     print(f"**F1 Score for {label}:** {metrics['F1 Score'] * 100:.2f}%\n")
-    #st.sidebar.markdown("---")
 
 def main():
     st.title("Toxic Comment Detector")
@@ -28,13 +35,14 @@ def main():
     This application is using manual implementation of Bagging Algorithm with Naive Bayer Classifier for toxicity detection.
     """)
 
-    best_model_Toxic, best_metrics_Toxic = load_best_model(".../TCD/models/best_model_IsToxic.pkl")
+    best_model_Toxic, best_metrics_Toxic = load_best_model("models/best_model_IsToxic.pkl")
+    #print(f"{os.getcwd()}/models/best_model_IsProvocative.pkl")
     modelToxic, metricsToxic = get_trained_model("IsToxic")
 
-    best_model_Provocative, best_metrics_Provocative = load_best_model(".../TCD/models/best_model_IsProvocative.pkl")
+    best_model_Provocative, best_metrics_Provocative = load_best_model("models/best_model_IsProvocative.pkl")
     modelProvocative, metricsProvocative = get_trained_model("IsProvocative")
 
-    best_model_Abusive, best_metrics_Abusive = load_best_model(".../TCD/models/best_model_IsAbusive.pkl")
+    best_model_Abusive, best_metrics_Abusive = load_best_model("models/best_model_IsAbusive.pkl")
     modelAbusive, metricsAbusive = get_trained_model("IsAbusive")
     
     modelToxic, metricsToxic = model_loader(best_model_Toxic, best_metrics_Toxic, modelToxic, metricsToxic, "IsToxic")

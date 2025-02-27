@@ -68,6 +68,7 @@ The project:
    pip install -r requirements.txt
 
 2. **Data**
+
    My program is using 4 attributes in dataset: Text, IsToxic, IsAbusive, IsProvocative. If you want to use your dataset put it in `data` and make sure there is same columns or change code in `data_loader.py`.
 
 3. **Run the App**

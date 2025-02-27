@@ -1,6 +1,6 @@
 # Toxic Comment Detector
 
-This project is an implementation of a basic text classifier to detect toxic comments and specific subcategories such as provocative or abusive language. It uses a custom implementation of a Bagging Classifier on top of a simple Naive Bayes model.
+This project is an implementation of a basic text classifier to detect toxic comments and specific subcategories such as provocative or abusive language. It uses a custom implementation of a Bagging Classifier on top of a simple Naive Bayes model. Algorithms and evaluation function is written by myself.
 
 ## Overview
 
@@ -10,6 +10,7 @@ The project:
 - Implements bagging (bootstrap aggregation) to combine multiple estimators for improved performance.
 - Evaluates models using standard metrics—accuracy, precision, recall, and F1 score.
 - Uses Streamlit to provide a simple web interface for testing single comments.
+- Comments in code is written on Slovak language.
 
 ## Architecture
 
@@ -63,6 +64,6 @@ The project:
    - pandas
    - streamlit
 
-   Install dependencies:
+   For installing dependencies on **Linux:**
    ```bash
    pip install pandas streamlit

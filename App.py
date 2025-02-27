@@ -6,13 +6,13 @@ def model_loader(best_model, best_metrics, model, metrics, label: str):
     if best_model is not None:
         if metrics["F1 Score"] > best_metrics["F1 Score"]:
             st.sidebar.info(f"Trained and saved better model than before for {label}.")
-            auto_save_best_model(model, metrics, f"/home/vacur/ML/TCD/models/best_model_{label}.pkl")
+            auto_save_best_model(model, metrics, f".../TCD/models/best_model_{label}.pkl")
         else:
             #st.sidebar.info(f"Using best saved model for {label}.") 
             model, metrics = best_model, best_metrics
     else:
         st.sidebar.info(f"No best model found for {label}. Training new model.")
-        auto_save_best_model(model, metrics, f"/home/vacur/ML/TCD/models/best_model_{label}.pkl")
+        auto_save_best_model(model, metrics, f".../TCD/models/best_model_{label}.pkl")
     return model, metrics
 
 def metrics(metrics, label: str):

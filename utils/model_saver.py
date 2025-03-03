@@ -4,7 +4,11 @@ import streamlit as st
 def auto_save_best_model(model, metrics, model_filename):
     """
     Automaticky uloží model na disk, ak je lepší ako najlepší uložený model.
-    Funkcia bude zmazana neskôr.
+
+    Parametre:
+    - model: natrénovaný model
+    - metrics: slovník metrík modelu
+    - model_filename: názov súboru, do ktorého sa má model uložiť
     """
     try:
         with open(model_filename, "rb") as f:
@@ -22,8 +26,14 @@ def auto_save_best_model(model, metrics, model_filename):
 
 def load_best_model(model_filename):
     """
-    Attempts to load the best model from disk.
-    Returns a tuple (model, metrics) if found, or (None, None) if no saved model exists.
+    Načíta model zo súboru.
+
+    Parametre:
+    - model_filename: názov súboru, z ktorého sa má model načíta
+
+    Navratove hodnoty:
+    - best_data["model"]: natrénovaný model
+    - best_data["metrics"]: slovník metrík modelu
     """
     try:
         with open(model_filename, "rb") as f:

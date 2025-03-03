@@ -32,7 +32,7 @@ def metrics(metrics, label: str):
 def main():
     st.title("Toxic Comment Detector")
     st.markdown("""
-    This application is using manual implementation of Bagging Algorithm with Naive Bayer Classifier for toxicity detection.
+    This application is using manual implementation of Bagging Algorithm with Naive Bayer Classifier for toxicity, abusing and provocation detection.
     """)
 
     best_model_Toxic, best_metrics_Toxic = load_best_model("models/best_model_IsToxic.pkl")
@@ -56,7 +56,7 @@ def main():
     print("-----------------------------------")
 
     st.markdown("---")
-    st.subheader("Check your comment for toxicity")
+    st.subheader("Check your comment")
     comment = st.text_area("Write the comment you want to check:", height=100)
     if st.button("Evaluate"):
         if comment.strip() == "":

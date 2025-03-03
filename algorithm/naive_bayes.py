@@ -10,6 +10,14 @@ class SimpleNaiveBayesClassifier:
     Používa bag-of-words prístup s Laplaceovým vyhladzovaním.
     """
     def __init__(self, alpha=1.0):
+        """
+        Parametre:
+        - alpha: parameter vyhladzovania
+        - class_counts: počet výskytov jednotlivých tried
+        - word_counts: slovníky s počtami slov pre každú triedu
+        - total_words: celkový počet slov v každej triede
+        - vocab: množina unikátnych slov vo všetkých dokument
+        """
         self.alpha = alpha           # parameter vyhladzovania
         self.class_counts = {}       # počet výskytov jednotlivých tried
         self.word_counts = {}        # slovníky s počtami slov pre každú triedu

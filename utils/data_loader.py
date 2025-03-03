@@ -3,6 +3,13 @@ import pandas as pd
 def load_data(label: str):
     """
     Načíta dáta zo súboru a vráti zoznam textov a príslušných labelov.
+
+    Parametre:
+    - label: názov stĺpca, ktorý obsahuje labely
+
+    Navratove hodnoty:
+    - zoznam textov
+    - zoznam labelov
     """
     data = pd.read_csv("data/youtoxic_english_1000.csv")
     texts = data['Text'].tolist()

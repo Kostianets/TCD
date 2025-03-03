@@ -7,6 +7,14 @@ from metrics.evaluation import accuracy_metric, precision_metric, recall_metric,
 def train_model(texts, labels):
     """
     Trénuje model na základe zoznamu textov a príslušných labelov.
+
+    Parametre:
+    - texts: zoznam textov
+    - labels: zoznam labelov
+
+    Navratove hodnoty:
+    - model: natrénovaný model
+    - metrics: slovník metrík model
     """
     combined = list(zip(texts, labels))
     random.shuffle(combined)
@@ -36,6 +44,13 @@ def train_model(texts, labels):
 def get_trained_model(label: str):
     """
     Načíta dáta, natrénuje model a vráti natrénovaný model a metriky.
+
+    Parametre:
+    - label: názov stĺpca, ktorý obsahuje labely
+
+    Navratova miera:
+    - model: natrénovaný model
+    - metrics: slovník metrík model
     """
     texts, labels = load_data(label)
     model, metrics = train_model(texts, labels)

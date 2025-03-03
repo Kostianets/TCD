@@ -8,8 +8,8 @@ def load_data(label: str):
     - label: názov stĺpca, ktorý obsahuje labely
 
     Navratove hodnoty:
-    - zoznam textov
-    - zoznam labelov
+    - texts: zoznam textov
+    - labels: zoznam labelov
     """
     data = pd.read_csv("data/youtoxic_english_1000.csv")
     texts = data['Text'].tolist()

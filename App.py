@@ -5,7 +5,18 @@ from utils.model_saver import auto_save_best_model, load_best_model
 
 def model_loader(best_model, best_metrics, model, metrics, label: str):
     """
-    Loads the best model if it exists, otherwise trains a new model.
+    Načíta model zo súboru, ak je lepší ako aktuálne natrenovany model.
+
+    Parametre:
+    - best_model: natrénovaný model
+    - best_metrics: slovník metrík modelu
+    - model: natrénovaný model
+    - metrics: slovník metrík modelu
+    - label: názov stĺpca, ktorý obsahuje labely
+
+    Navratove hodnoty:
+    - model: natrénovaný model
+    - metrics: slovník metrík model
     """
     if best_model is not None:
         if metrics["F1 Score"] > best_metrics["F1 Score"]:
@@ -22,7 +33,7 @@ def model_loader(best_model, best_metrics, model, metrics, label: str):
 
 def metrics(metrics, label: str):
     """
-    Prints the metrics for the given label.
+    Vypíše metriky modelu.
     """
     print(f"**Accuracy for {label}:** {metrics['Accuracy'] * 100:.2f}%")
     print(f"**Precision for {label}:** {metrics['Precision'] * 100:.2f}%")

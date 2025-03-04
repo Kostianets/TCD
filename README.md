@@ -1,6 +1,6 @@
 # Toxic Comment Detector
 
-This project is an implementation of a basic text classifier to detect toxic comments and specific subcategories such as provocative or abusive language. It uses a custom implementation of a Bagging Classifier on top of a simple Naive Bayes model. Algorithms and evaluation function is written by myself.
+This project is an implementation of a basic text classifier to detect toxic comments and specific subcategories such as provocative or abusive language. It uses a custom implementation of a Bagging Classifier on top of a simple Naive Bayes model and evaluation functions.
 
 ## Overview
 
@@ -8,7 +8,7 @@ The project:
 - Loads text data and associated binary labels (e.g. IsToxic, IsProvocative, IsAbusive) from CSV.
 - Uses a simple bag-of-words Naive Bayes classifier with Laplace smoothing as the base estimator.
 - Implements bagging (bootstrap aggregation) to combine multiple estimators for improved performance.
-- Evaluates models using standard metrics—accuracy, precision, recall, and F1 score.
+- Evaluates models using standard metrics — accuracy, precision, recall, and F1 score.
 - Uses Streamlit to provide a simple web interface for testing single comments.
 - Comments in code is written on Slovak language.
 
@@ -21,6 +21,7 @@ The project:
 2. **Base Classification Model**  
    - **File:** `algorithm/naive_bayes.py`  
    - **Description:** Implements a simple Naive Bayes classifier that:
+
      - Tokenizes input text.
      - Counts words per class and calculates class priors.
      - Predicts class labels based on maximum likelihood using Laplace smoothing.
@@ -28,6 +29,7 @@ The project:
 3. **Bagging Aggregation**  
    - **File:** `algorithm/bagging.py`  
    - **Description:** Implements the Bagging algorithm that:
+   
      - Creates multiple bootstrap samples of the data.
      - Trains a separate base estimator (SimpleNaiveBayesClassifier) on each sample.
      - Aggregates predictions using majority voting.
@@ -63,7 +65,7 @@ The project:
    - pandas
    - streamlit
 
-   For installing dependencies on **Linux:**
+   For installing dependencies:
    ```bash
    pip install -r requirements.txt
 
@@ -72,6 +74,5 @@ The project:
    My program is using 4 attributes in dataset: Text, IsToxic, IsAbusive, IsProvocative. If you want to use your dataset put it in `data` and make sure there is same columns or change code in `data_loader.py`.
 
 3. **Run the App**
-    **Linux:**
     ```bash
     streamlit run App.py

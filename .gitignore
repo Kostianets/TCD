@@ -11,3 +11,11 @@ __pycache__/
 *.pyc
 env/
 venv/
+
+# Files
+#evals.py
+
+#Images
+evaluation_metrics_IsToxic.png
+evaluation_metrics_IsAbusive.png
+evaluation_metrics_IsProvocative.png

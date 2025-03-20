@@ -71,7 +71,7 @@ def evaluate_model(model, texts, labels, model_label):
     texts_shuffled, labels_shuffled = zip(*combined)
     n_samples = len(texts_shuffled)
     
-    train_end = int(0.70 * n_samples)  # trénovacia časť (len na split)
+    train_end = int(0.70 * n_samples)
     test_end = int(0.85 * n_samples)
     
     X_test = list(texts_shuffled[train_end:test_end])

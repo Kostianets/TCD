@@ -7,7 +7,7 @@ def load_data(label: str):
     Parametre:
     - label: názov stĺpca, ktorý obsahuje labely
 
-    Navratove hodnoty:
+    Returns:
     - texts: zoznam textov
     - labels: zoznam labelov
     """

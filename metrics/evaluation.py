@@ -9,7 +9,7 @@ def accuracy_metric(y_true, y_pred):
     - y_true: zoznam skutočných hodnôt
     - y_pred: zoznam predikovaných hodnôt
     
-    Návratová hodnota:
+    Returns:
     - presnosť modelu
     """
     correct = sum(1 for true, pred in zip(y_true, y_pred) if true == pred)
@@ -24,7 +24,7 @@ def precision_metric(y_true, y_pred, positive=1):
     - y_pred: zoznam predikovaných hodnôt
     - positive: hodnota, ktorá predstavuje pozitívnu triedu (štandardne 1)
     
-    Návratová hodnota:
+    Returns:
     - precision pre pozitívnu triedu
     """
     tp = sum(1 for true, pred in zip(y_true, y_pred) if true == positive and pred == positive)
@@ -40,7 +40,7 @@ def recall_metric(y_true, y_pred, positive=1):
     - y_pred: zoznam predikovaných hodnôt
     - positive: hodnota, ktorá predstavuje pozitívnu triedu (štandardne 1)
     
-    Návratová hodnota:
+    Returns:
     - recall pre pozitívnu triedu
     """
     tp = sum(1 for true, pred in zip(y_true, y_pred) if true == positive and pred == positive)
@@ -56,7 +56,7 @@ def f1_metric(y_true, y_pred, positive=1):
     - y_pred: zoznam predikovaných hodnôt
     - positive: hodnota, ktorá predstavuje pozitívnu triedu (štandardne 1)
     
-    Návratová hodnota:
+    Returns:
     - F1 miera
     """
     prec = precision_metric(y_true, y_pred, positive)

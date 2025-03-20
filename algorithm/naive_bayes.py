@@ -61,7 +61,7 @@ class SimpleNaiveBayesClassifier:
         Parametre:
         - X: zoznam textov
         
-        Návratová hodnota:
+        Returns:
         - zoznam predikovaných tried
         """
         predictions = []

@@ -31,7 +31,7 @@ def load_best_model(model_filename):
     Parametre:
     - model_filename: názov súboru, z ktorého sa má model načíta
 
-    Navratove hodnoty:
+    Returns:
     - best_data["model"]: natrénovaný model
     - best_data["metrics"]: slovník metrík modelu
     """

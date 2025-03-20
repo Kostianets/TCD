@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def get_evals(model_label, test_metrics, eval_metrics, suffix=""):
+def evals_comparation(model_label, test_metrics, eval_metrics, suffix=""):
     """
     Vytvorí graf porovnávajúci metriky modelu na testovacej a evalučnej množine.
     """

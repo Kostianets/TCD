@@ -2,7 +2,7 @@ import random
 from algorithm.bagging import BaggingClassifier
 from algorithm.naive_bayes import SimpleNaiveBayesClassifier
 from utils.data_loader import load_data
-from utils.evals import get_evals
+from TCD.utils.comparation import evals_comparation
 from metrics.evaluation import accuracy_metric, precision_metric, recall_metric, f1_metric
 from utils.model_saver import auto_save_best_model, load_best_model
 
@@ -54,7 +54,7 @@ def train_model(texts, labels, model_label):
         "F1 Score": f1_metric(y_eval, predictions_eval)
     }
     
-    #get_evals(model_label, test_metrics, eval_metrics)
+    #evals_comparation(model_label, test_metrics, eval_metrics)
     
     return model, test_metrics, eval_metrics
 
@@ -97,7 +97,7 @@ def evaluate_model(model, texts, labels, model_label):
     }
     
     # Uloží evaluačný graf pre aktuálne vyhodnotenie
-    #get_evals(model_label, test_metrics, eval_metrics)
+    #evals_comparation(model_label, test_metrics, eval_metrics)
     
     return eval_metrics
 
@@ -118,7 +118,7 @@ def get_trained_model(label: str):
 
     if best_model is not None:
         test_metrics = evaluate_model(best_model, texts, labels, label)
-        #get_evals(label, best_metrics, test_metrics, suffix="_best")
+        #evals_comparation(label, best_metrics, test_metrics, suffix="_best")
         return best_model, test_metrics
     else:
         model, test_metrics = train_model(texts, labels, label)

@@ -2,7 +2,7 @@ import random
 from algorithm.bagging import BaggingClassifier
 from algorithm.naive_bayes import SimpleNaiveBayesClassifier
 from utils.data_loader import load_data
-from TCD.utils.comparation import evals_comparation
+from utils.comparation import evals_comparation
 from metrics.evaluation import accuracy_metric, precision_metric, recall_metric, f1_metric
 from utils.model_saver import auto_save_best_model, load_best_model
 

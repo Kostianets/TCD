@@ -37,7 +37,7 @@ The project:
 4. **Model Training**  
    - **File:** `utils/model_trainer.py`  
    - **Description:**  
-     - Provides a function `train_model` that shuffles data, splits it into training and test sets, trains the Bagging classifier, and calculates evaluation metrics on the test set.
+     - Provides a function `train_model` that shuffles data, splits it into training, test and evaluation sets (70/15/15), trains the Bagging classifier, and calculates evaluation metrics on the test set.
      - The `get_trained_model` function loads the data for a given label and returns the model and its metrics.
 
 5. **Evaluation Metrics**  

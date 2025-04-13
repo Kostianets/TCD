@@ -13,7 +13,7 @@ env/
 venv/
 
 # Files
-#evals.py
+comparation.py
 
 #Images
 evaluation_metrics_IsToxic.png

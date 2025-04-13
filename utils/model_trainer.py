@@ -111,7 +111,7 @@ def get_trained_model(label: str):
     best_model, best_metrics = load_best_model(f"models/best_model_{label}.pkl")
 
     if best_model is not None:
-        test_metrics = evaluate_model(best_model, texts, labels, label)
+        test_metrics = evaluate_model(best_model, texts, labels)
         return best_model, test_metrics
     else:
         model, test_metrics = train_model(texts, labels, label)

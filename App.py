@@ -39,6 +39,19 @@ def metrics(metrics, label: str):
     print(f"**F1 Score for {label}:** {metrics['F1 Score'] * 100:.2f}%\n")
 
 def main():
+    css = """
+    <style>
+    .stButton>button {
+        background-color: #4CAF50;  /* Green button */
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        border: none;
+    }
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+
     st.title("Toxic Comment Detector")
     st.markdown("""
     This application is using manual implementation of Bagging Algorithm with Naive Bayes Classifier for toxicity, abusing and provocation detection.

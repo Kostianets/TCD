@@ -9,7 +9,6 @@ def train_model(texts, labels):
     """
     Trénuje model na základe zoznamu textov a príslušných labelov.
     Používa 70% dát na trénovanie, 15% na testovanie a 15% na evaluáciu.
-    Uloží evaluačný graf.
     
     Parameters
     ----------
@@ -35,9 +34,6 @@ def train_model(texts, labels):
     X_test = list(texts_shuffled[train_end:test_end])
     y_test = list(labels_shuffled[train_end:test_end])
     
-    X_eval = list(texts_shuffled[test_end:])
-    y_eval = list(labels_shuffled[test_end:])
-    
     model = BaggingClassifier(base_estimator=SimpleNaiveBayesClassifier,
                               n_estimators=10,
                               max_samples=len(X_train))
@@ -51,20 +47,11 @@ def train_model(texts, labels):
         "F1 Score": f1_metric(y_test, predictions_test)
     }
     
-    predictions_eval = model.predict(X_eval)
-    eval_metrics = {
-        "Accuracy": accuracy_metric(y_eval, predictions_eval),
-        "Precision": precision_metric(y_eval, predictions_eval),
-        "Recall": recall_metric(y_eval, predictions_eval),
-        "F1 Score": f1_metric(y_eval, predictions_eval)
-    }
-    
-    return model, test_metrics, eval_metrics
+    return model, test_metrics
 
 def evaluate_model(model, texts, labels):
     """
-    Vyhodnotí existujúci model pomocou 70%/15%/15% splitu (trénovacia časť nie je použitá)
-    a uloží evaluačný graf.
+    Vyhodnotí existujúci model pomocou 70%/15%/15% splitu (trénovacia časť nie je použitá).
     
     Parameters
     ----------
@@ -80,23 +67,11 @@ def evaluate_model(model, texts, labels):
     random.shuffle(combined)
     texts_shuffled, labels_shuffled = zip(*combined)
     n_samples = len(texts_shuffled)
-    
-    train_end = int(0.70 * n_samples)
+
     test_end = int(0.85 * n_samples)
-    
-    X_test = list(texts_shuffled[train_end:test_end])
-    y_test = list(labels_shuffled[train_end:test_end])
     
     X_eval = list(texts_shuffled[test_end:])
     y_eval = list(labels_shuffled[test_end:])
-    
-    predictions_test = model.predict(X_test)
-    test_metrics = {
-        "Accuracy": accuracy_metric(y_test, predictions_test),
-        "Precision": precision_metric(y_test, predictions_test),
-        "Recall": recall_metric(y_test, predictions_test),
-        "F1 Score": f1_metric(y_test, predictions_test)
-    }
     
     predictions_eval = model.predict(X_eval)
     eval_metrics = {

@@ -76,3 +76,6 @@ The project:
 3. **Run the App**
     ```bash
     streamlit run App.py
+
+## Documentation
+If you want more detailed description, you can read documentation that also is in this repository.

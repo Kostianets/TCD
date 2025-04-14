@@ -24,6 +24,9 @@ class BaggingClassifier:
         """
         Vytvorí novú inštanciu základného klasifikátora.
         Predpokladáme, že base_estimator je trieda, ktorú možno volať bez argumentov.
+
+        Returns:
+        - nová inštancia základného klasifikátora
         """
         return self.base_estimator()
 
@@ -36,7 +39,7 @@ class BaggingClassifier:
             self.max_samples = n_samples
         
         self.estimators = []  # vyčistenie predchádzajúcich modelov
-        for i in range(self.n_estimators):
+        for _ in range(self.n_estimators):
             # Vytvorenie bootstrap vzorky (náhodný výber s opakovaním)
             indices = [random.randint(0, n_samples - 1) for _ in range(self.max_samples)]
             X_sample = [X[idx] for idx in indices]
@@ -51,6 +54,9 @@ class BaggingClassifier:
         """
         Vráti triedu s najväčším počtom hlasov z daného zoznamu predikcií.
         V prípade remízy vráti prvú z najčastejších tried.
+
+        Returns:
+        - trieda s najväčším počtom hlasov
         """
         vote_count = {}
         for pred in predictions:
@@ -64,7 +70,7 @@ class BaggingClassifier:
         """
         Vykoná predikciu na dátach X.
         
-        Návratová hodnota:
+        Returns:
         - zoznam predikovaných tried získaných hlasovaním zo všetkých modelov.
         """
         all_predictions = [estimator.predict(X) for estimator in self.estimators]

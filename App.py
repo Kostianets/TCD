@@ -13,7 +13,7 @@ def model_loader(best_model, best_metrics, model, metrics, label: str):
     - metrics: slovník metrík modelu
     - label: názov stĺpca, ktorý obsahuje labely
 
-    Navratove hodnoty:
+    Returns:
     - model: natrénovaný model
     - metrics: slovník metrík model
     """

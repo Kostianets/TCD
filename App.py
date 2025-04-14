@@ -43,12 +43,111 @@ def metrics(metrics, label: str):
 def main():
     css = """
     <style>
+    /* General styling for the Streamlit app */
+    .stApp {
+        background-color: #1A1A1A; /* Dark background */
+        color: white; /* White text */
+        font-family: Arial, sans-serif; /* Clean font */
+    }
+
+    /* Container for centering content */
+    .container {
+        max-width: 800px; /* Constrain width */
+        margin: 0 auto; /* Center container */
+        padding: 20px; /* Internal spacing */
+    }
+
+    /* Header styling */
+    header {
+        border-bottom: 1px solid #444; /* Subtle divider */
+        padding-bottom: 20px; /* Space below header */
+    }
+
+    header h1 {
+        font-size: 2.8em; /* Large title */
+        text-transform: uppercase; /* Uppercase text */
+        text-align: center; /* Centered */
+        margin-bottom: 10px; /* Space below title */
+    }
+
+    header p {
+        font-size: 1.1em; /* Subtitle size */
+        text-align: center; /* Centered */
+        line-height: 1.5; /* Improved readability */
+    }
+
+    /* Main content styling */
+    main h2 {
+        font-size: 2em; /* Bold subheading */
+        text-align: center; /* Centered */
+        margin-top: 30px; /* Space above */
+    }
+
+    main p {
+        font-size: 1em; /* Regular text */
+        text-align: center; /* Centered */
+        margin-bottom: 20px; /* Space below */
+    }
+
+    /* Textarea styling for comment input */
+    .stTextArea textarea {
+        width: 100%; /* Full width */
+        height: 150px; /* Tall input area */
+        background-color: #333333; /* Dark gray background */
+        color: white; /* White text */
+        border: 1px solid #444; /* Subtle border */
+        border-radius: 10px; /* Rounded corners */
+        padding: 10px; /* Internal spacing */
+        font-size: 1em; /* Consistent font size */
+        resize: none; /* Prevent resizing */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    }
+
+    .stTextArea textarea::placeholder {
+        color: #aaa; /* Light gray placeholder */
+    }
+
+    .stTextArea textarea:focus {
+        outline: none; /* Remove default outline */
+        border-color: #28A745; /* Green border on focus */
+    }
+
+    /* Button styling */
     .stButton>button {
-        background-color: #4CAF50;  /* Green button */
-        color: white;
-        border-radius: 5px;
-        padding: 10px 20px;
-        border: none;
+        display: block; /* Block for centering */
+        margin: 20px auto; /* Center button */
+        background-color: #28A745; /* Green background */
+        color: white; /* White text */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px 20px; /* Comfortable padding */
+        font-size: 1em; /* Consistent font size */
+        cursor: pointer; /* Hand cursor on hover */
+        min-width: 120px; /* Ensure button width */
+        transition: background-color 0.3s ease; /* Smooth hover transition */
+    }
+
+    .stButton>button:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        header h1 {
+            font-size: 2em; /* Smaller title on small screens */
+        }
+        main h2 {
+            font-size: 1.5em; /* Smaller subheading */
+        }
+        .stTextArea textarea {
+            height: 100px; /* Reduced height for smaller screens */
+        }
+    }
+
+    @media (max-width: 400px) {
+        .container Quartz {
+            padding: 10px; /* Reduced padding on very small screens */
+        }
     }
     </style>
     """

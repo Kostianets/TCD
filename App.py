@@ -43,110 +43,103 @@ def metrics(metrics, label: str):
 def main():
     css = """
     <style>
-    /* General styling for the Streamlit app */
     .stApp {
-        background-color: #1A1A1A; /* Dark background */
-        color: white; /* White text */
-        font-family: Arial, sans-serif; /* Clean font */
+        background-color: #1A1A1A;
+        color: white; 
+        font-family: Arial, sans-serif;
     }
 
-    /* Container for centering content */
     .container {
-        max-width: 800px; /* Constrain width */
-        margin: 0 auto; /* Center container */
-        padding: 20px; /* Internal spacing */
+        max-width: 800px; 
+        margin: 0 auto; 
+        padding: 20px; 
     }
 
-    /* Header styling */
     header {
-        border-bottom: 1px solid #444; /* Subtle divider */
-        padding-bottom: 20px; /* Space below header */
+        border-bottom: 1px solid #444; 
+        padding-bottom: 20px;
     }
 
     header h1 {
-        font-size: 2.8em; /* Large title */
-        text-transform: uppercase; /* Uppercase text */
-        text-align: center; /* Centered */
-        margin-bottom: 10px; /* Space below title */
+        font-size: 2.8em; 
+        text-transform: uppercase; 
+        text-align: center; 
+        margin-bottom: 10px;
     }
 
     header p {
-        font-size: 1.1em; /* Subtitle size */
-        text-align: center; /* Centered */
-        line-height: 1.5; /* Improved readability */
+        font-size: 1.1em;
+        text-align: center; 
+        line-height: 1.5; 
     }
 
-    /* Main content styling */
     main h2 {
-        font-size: 2em; /* Bold subheading */
-        text-align: center; /* Centered */
-        margin-top: 30px; /* Space above */
+        font-size: 2em;
+        text-align: center;
+        margin-top: 30px;
     }
 
     main p {
-        font-size: 1em; /* Regular text */
-        text-align: center; /* Centered */
-        margin-bottom: 20px; /* Space below */
+        font-size: 1em;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    /* Textarea styling for comment input */
     .stTextArea textarea {
-        width: 100%; /* Full width */
-        height: 150px; /* Tall input area */
-        background-color: #333333; /* Dark gray background */
-        color: white; /* White text */
-        border: 1px solid #444; /* Subtle border */
-        border-radius: 10px; /* Rounded corners */
-        padding: 10px; /* Internal spacing */
-        font-size: 1em; /* Consistent font size */
-        resize: none; /* Prevent resizing */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        width: 100%;
+        height: 150px;
+        background-color: #333333;
+        color: white;
+        border: 1px solid #444;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 1em;
+        resize: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
 
     .stTextArea textarea::placeholder {
-        color: #aaa; /* Light gray placeholder */
+        color: #aaa;
     }
 
     .stTextArea textarea:focus {
-        outline: none; /* Remove default outline */
-        border-color: #28A745; /* Green border on focus */
+        outline: none; 
+        border-color: #28A745;
     }
 
-    /* Button styling */
     .stButton>button {
-        display: block; /* Block for centering */
-        margin: 20px auto; /* Center button */
-        background-color: #28A745; /* Green background */
-        color: white; /* White text */
-        border: none; /* No border */
-        border-radius: 5px; /* Rounded corners */
-        padding: 10px 20px; /* Comfortable padding */
-        font-size: 1em; /* Consistent font size */
-        cursor: pointer; /* Hand cursor on hover */
-        min-width: 120px; /* Ensure button width */
-        transition: background-color 0.3s ease; /* Smooth hover transition */
+        display: block;
+        margin: 20px auto; 
+        background-color: #28A745; 
+        color: white; 
+        border: none; 
+        border-radius: 5px; 
+        padding: 10px 20px; 
+        font-size: 1em; 
+        cursor: pointer; 
+        min-width: 120px;
+        transition: background-color 0.3s ease;
     }
 
     .stButton>button:hover {
-        background-color: #218838; /* Darker green on hover */
+        background-color: #218838;
     }
 
-    /* Responsive adjustments */
     @media (max-width: 600px) {
         header h1 {
-            font-size: 2em; /* Smaller title on small screens */
+            font-size: 2em;
         }
         main h2 {
-            font-size: 1.5em; /* Smaller subheading */
+            font-size: 1.5em;
         }
         .stTextArea textarea {
-            height: 100px; /* Reduced height for smaller screens */
+            height: 100px;
         }
     }
 
     @media (max-width: 400px) {
         .container Quartz {
-            padding: 10px; /* Reduced padding on very small screens */
+            padding: 10px;
         }
     }
     </style>

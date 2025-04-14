@@ -68,10 +68,10 @@ def evaluate_model(model, texts, labels):
     texts_shuffled, labels_shuffled = zip(*combined)
     n_samples = len(texts_shuffled)
 
-    test_end = int(0.85 * n_samples)
+    eval_start = int(0.85 * n_samples)
     
-    X_eval = list(texts_shuffled[test_end:])
-    y_eval = list(labels_shuffled[test_end:])
+    X_eval = list(texts_shuffled[eval_start:])
+    y_eval = list(labels_shuffled[eval_start:])
     
     predictions_eval = model.predict(X_eval)
     eval_metrics = {

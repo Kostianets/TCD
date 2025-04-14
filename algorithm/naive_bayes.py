@@ -11,7 +11,8 @@ class SimpleNaiveBayesClassifier:
     """
     def __init__(self, alpha=1.0):
         """
-        Parametre:
+        Parameters
+        ----------
         - alpha: parameter vyhladzovania
         - class_counts: počet výskytov jednotlivých tried
         - word_counts: slovníky s počtami slov pre každú triedu
@@ -27,6 +28,14 @@ class SimpleNaiveBayesClassifier:
     def tokenize(self, text):
         """
         Tokenizácia textu: prevod na malé písmená, odstránenie interpunkcie a rozdelenie podľa medzier.
+
+        Parameters
+        ----------
+        - text: vstupný text (komentár)
+
+        Returns
+        -------
+        - text.split(): zoznam tokenov (slov)
         """
         text = text.lower()
         text = re.sub(r'[^\w\s]', '', text)
@@ -36,7 +45,8 @@ class SimpleNaiveBayesClassifier:
         """
         Natrénuje Naive Bayes klasifikátor.
         
-        Parametre:
+        Parameters
+        ----------
         - X: zoznam textov (komentárov)
         - y: zoznam príslušných tried (napr. 0 - netoxický, 1 - toxický)
         """
@@ -58,11 +68,13 @@ class SimpleNaiveBayesClassifier:
         """
         Vykoná predikciu tried pre zoznam textov.
         
-        Parametre:
+        Parameters
+        ----------
         - X: zoznam textov
         
-        Returns:
-        - zoznam predikovaných tried
+        Returns
+        -------
+        - predictions: zoznam predikovaných tried
         """
         predictions = []
         for text in X:

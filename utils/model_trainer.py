@@ -11,7 +11,13 @@ def train_model(texts, labels):
     Používa 70% dát na trénovanie, 15% na testovanie a 15% na evaluáciu.
     Uloží evaluačný graf.
     
-    Returns:
+    Parameters
+    ----------
+    - texts: zoznam textov (komentárov)
+    - labels: zoznam príslušných tried (napr. 0 - netoxický, 1 - toxický)
+
+    Returns
+    -------
     - model: natrénovaný model
     - metrics: slovník metrík (testovacia množina)
     """
@@ -60,7 +66,14 @@ def evaluate_model(model, texts, labels):
     Vyhodnotí existujúci model pomocou 70%/15%/15% splitu (trénovacia časť nie je použitá)
     a uloží evaluačný graf.
     
-    Returns:
+    Parameters
+    ----------
+    - model: existujúci model na vyhodnotenie
+    - texts: zoznam textov (komentárov)
+    - labels: zoznam príslušných tried (napr. 0 - netoxický, 1 - toxický)
+    
+    Returns
+    -------
     - metrics: slovník metrík na testovacej množine
     """
     combined = list(zip(texts, labels))
@@ -103,7 +116,12 @@ def get_trained_model(label: str):
     Ak je nový model lepší, uloží sa ako najlepší a jeho výsledky
     sa uložia do evaluačného grafu s príponou "_best".
     
-    Returns:
+    Parameters
+    ----------
+    - label: názov stĺpca, ktorý obsahuje labely (napr. "IsToxic", "IsAbusive", "IsProvocative")
+
+    Returns
+    -------
     - model: najlepší model pre daný label
     - metrics: slovník metrík na testovacej množine
     """

@@ -5,11 +5,13 @@ def accuracy_metric(y_true, y_pred):
     """
     Vypočíta presnosť (accuracy).
     
-    Parametre:
+    Parameters
+    ----------
     - y_true: zoznam skutočných hodnôt
     - y_pred: zoznam predikovaných hodnôt
     
-    Returns:
+    Returns
+    -------
     - presnosť modelu
     """
     correct = sum(1 for true, pred in zip(y_true, y_pred) if true == pred)
@@ -19,13 +21,15 @@ def precision_metric(y_true, y_pred, positive=1, average='weighted'):
     """
     Vypočíta presnosť (precision) s podporou pre priemerovanie ako v sklearn.
     
-    Parametre:
+    Parameters
+    ----------
     - y_true: zoznam skutočných hodnôt
     - y_pred: zoznam predikovaných hodnôt
     - positive: hodnota pozitívnej triedy (štandardne 1), použité len pre average='binary'
     - average: typ priemerovania ('binary' alebo 'weighted', štandardne 'weighted')
     
-    Returns:
+    Returns
+    -------
     - precision (buď pre pozitívnu triedu alebo vážený priemer)
     """
     if average == 'binary':
@@ -51,13 +55,15 @@ def recall_metric(y_true, y_pred, positive=1, average='weighted'):
     """
     Vypočíta návratnosť (recall) s podporou pre priemerovanie ako v sklearn.
     
-    Parametre:
+    Parameters
+    ----------
     - y_true: zoznam skutočných hodnôt
     - y_pred: zoznam predikovaných hodnôt
     - positive: hodnota pozitívnej triedy (štandardne 1), použité len pre average='binary'
     - average: typ priemerovania ('binary' alebo 'weighted', štandardne 'weighted')
     
-    Returns:
+    Returns
+    -------
     - recall (buď pre pozitívnu triedu alebo vážený priemer)
     """
     if average == 'binary':
@@ -83,13 +89,15 @@ def f1_metric(y_true, y_pred, positive=1, average='weighted'):
     """
     Vypočíta F1 mieru s podporou pre priemerovanie ako v sklearn.
     
-    Parametre:
+    Parameters
+    ----------
     - y_true: zoznam skutočných hodnôt
     - y_pred: zoznam predikovaných hodnôt
     - positive: hodnota pozitívnej triedy (štandardne 1), použité len pre average='binary'
     - average: typ priemerovania ('binary' alebo 'weighted', štandardne 'weighted')
     
-    Returns:
+    Returns
+    -------
     - F1 miera (buď pre pozitívnu triedu alebo vážený priemer)
     """
     if average == 'binary':

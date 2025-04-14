@@ -8,7 +8,8 @@ class BaggingClassifier:
     """
     def __init__(self, base_estimator, n_estimators=10, max_samples=None):
         """
-        Parametre:
+        Parameters
+        ----------
         - base_estimator: Trieda základného klasifikátora (napr. SimpleNaiveBayesClassifier),
                           ktorá musí mať metódy fit a predict.
         - n_estimators: Počet základných modelov.
@@ -25,14 +26,20 @@ class BaggingClassifier:
         Vytvorí novú inštanciu základného klasifikátora.
         Predpokladáme, že base_estimator je trieda, ktorú možno volať bez argumentov.
 
-        Returns:
-        - nová inštancia základného klasifikátora
+        Returns
+        -------
+        - self.base_estimator(): nová inštancia základného klasifikátora
         """
         return self.base_estimator()
 
     def fit(self, X, y):
         """
         Natrénuje bagging klasifikátor na trénovacích dátach X a y.
+
+        Parameters
+        ----------
+        - X: Trénovacie dáta (zoznam textov).
+        - y: Príslušné triedy (zoznam labelov).
         """
         n_samples = len(X)
         if self.max_samples is None:
@@ -55,8 +62,13 @@ class BaggingClassifier:
         Vráti triedu s najväčším počtom hlasov z daného zoznamu predikcií.
         V prípade remízy vráti prvú z najčastejších tried.
 
-        Returns:
-        - trieda s najväčším počtom hlasov
+        Parameters
+        ----------
+        - predictions: zoznam predikcií (tried) od jednotlivých modelov.
+
+        Returns
+        -------
+        - pred: trieda s najväčším počtom hlasov
         """
         vote_count = {}
         for pred in predictions:
@@ -70,8 +82,13 @@ class BaggingClassifier:
         """
         Vykoná predikciu na dátach X.
         
-        Returns:
-        - zoznam predikovaných tried získaných hlasovaním zo všetkých modelov.
+        Parameters
+        ----------
+        - X: dáta, pre ktoré chceme vykonať predikciu (zoznam textov).
+
+        Returns
+        -------
+        - aggregated_predictions: zoznam predikovaných tried získaných hlasovaním zo všetkých modelov.
         """
         all_predictions = [estimator.predict(X) for estimator in self.estimators]
         all_predictions = list(zip(*all_predictions))

@@ -4,10 +4,12 @@ def load_data(label: str):
     """
     Načíta dáta zo súboru a vráti zoznam textov a príslušných labelov.
 
-    Parametre:
+    Parameters
+    ----------
     - label: názov stĺpca, ktorý obsahuje labely
 
-    Returns:
+    Returns
+    -------
     - texts: zoznam textov
     - labels: zoznam labelov
     """

@@ -5,7 +5,8 @@ def auto_save_best_model(model, metrics, model_filename):
     """
     Automaticky uloží model na disk, ak je lepší ako najlepší uložený model.
 
-    Parametre:
+    Parameters
+    ----------
     - model: natrénovaný model
     - metrics: slovník metrík modelu
     - model_filename: názov súboru, do ktorého sa má model uložiť
@@ -28,10 +29,12 @@ def load_best_model(model_filename):
     """
     Načíta model zo súboru.
 
-    Parametre:
+    Parameters
+    ----------
     - model_filename: názov súboru, z ktorého sa má model načíta
 
-    Returns:
+    Returns
+    -------
     - best_data["model"]: natrénovaný model
     - best_data["metrics"]: slovník metrík modelu
     """

@@ -6,14 +6,16 @@ def model_loader(best_model, best_metrics, model, metrics, label: str):
     """
     Načíta model zo súboru, ak je lepší ako aktuálne natrenovany model.
 
-    Parametre:
+    Parameters
+    ----------
     - best_model: natrénovaný model
     - best_metrics: slovník metrík modelu
     - model: natrénovaný model
     - metrics: slovník metrík modelu
     - label: názov stĺpca, ktorý obsahuje labely
 
-    Returns:
+    Returns
+    -------
     - model: natrénovaný model
     - metrics: slovník metrík model
     """

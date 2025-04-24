@@ -43,107 +43,105 @@ def metrics(metrics, label: str):
 def main():
     css = """
     <style>
+    /* App background, font and heading colors */
     .stApp {
-        background-color: #1A1A1A;
-        color: white; 
-        font-family: Arial, sans-serif;
+        background-color: #1E1E2E;
+        color: #E0E0E0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #4FD1C5;          /* mint accent */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        margin-bottom: 0.5em;
     }
 
-    .container {
-        max-width: 800px; 
-        margin: 0 auto; 
-        padding: 20px; 
-    }
-
-    header {
-        border-bottom: 1px solid #444; 
-        padding-bottom: 20px;
-    }
-
-    header h1 {
-        font-size: 2.8em; 
-        text-transform: uppercase; 
-        text-align: center; 
-        margin-bottom: 10px;
-    }
-
-    header p {
-        font-size: 1.1em;
-        text-align: center; 
-        line-height: 1.5; 
-    }
-
-    main h2 {
-        font-size: 2em;
-        text-align: center;
-        margin-top: 30px;
-    }
-
-    main p {
-        font-size: 1em;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .stTextArea textarea {
-        width: 100%;
-        height: 150px;
-        background-color: #333333;
-        color: white;
-        border: 1px solid #444;
-        border-radius: 10px;
-        padding: 10px;
-        font-size: 1em;
-        resize: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    }
-
-    .stTextArea textarea::placeholder {
-        color: #aaa;
-    }
-
-    .stTextArea textarea:focus {
-        outline: none; 
-        border-color: #28A745;
-    }
-
+    /* Button styling */
     .stButton>button {
-        display: block;
-        margin: 20px auto; 
-        background-color: #28A745; 
-        color: white; 
-        border: none; 
-        border-radius: 5px; 
-        padding: 10px 20px; 
-        font-size: 1em; 
-        cursor: pointer; 
-        min-width: 120px;
-        transition: background-color 0.3s ease;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Sidebar styling */
+    .stSidebar {
+        background-color: #2A2A3E;
+        padding: 20px;
+        border-right: 2px solid #44475a;
+    }
+    /* Only style buttons in the sidebar */
+    .stSidebar .stButton > button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 12px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.3s ease, transform 0.1s ease;
+    }
+    .stSidebar .stButton > button:hover {
+        background: linear-gradient(135deg, #764ba2, #667eea);
+        transform: translateY(-1px);
     }
 
-    .stButton>button:hover {
-        background-color: #218838;
+    /* Text area and text input */
+    .stTextArea textarea, .stTextInput input {
+        background-color: #282A36;
+        color: #F8F8F2;
+        border: 1px solid #6272a4;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 15px;
+        width: 100%;
+    }
+    .stTextArea textarea:focus, .stTextInput input:focus {
+        border-color: #50FA7B;
+        box-shadow: 0 0 6px rgba(80, 250, 123, 0.5);
+        outline: none;
     }
 
-    @media (max-width: 600px) {
-        header h1 {
-            font-size: 2em;
-        }
-        main h2 {
-            font-size: 1.5em;
-        }
-        .stTextArea textarea {
-            height: 100px;
-        }
+    /* Section separators */
+    hr, .stMarkdown hr {
+        border: none;
+        border-top: 1px solid #44475a;
+        margin: 2em 0;
     }
 
-    @media (max-width: 400px) {
-        .container Quartz {
+    /* Success and error messages */
+    .stSuccess, .stError {
+        background-color: #282A36;
+        color: #F8F8F2;
+        border-radius: 6px;
+        padding: 12px;
+        margin: 12px 0;
+        border-left: 4px solid;
+    }
+    .stSuccess {
+        border-color: #50FA7B;
+    }
+    .stError {
+        border-color: #FF5555;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+        .stApp {
+            padding: 10px;
+        }
+        .stTextArea textarea, .stTextInput input {
+            font-size: 14px;
             padding: 10px;
         }
     }
     </style>
     """
+
     st.markdown(css, unsafe_allow_html=True)
 
     st.title("Toxic Comment Detector")

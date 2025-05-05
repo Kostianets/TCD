@@ -1,6 +1,7 @@
 import streamlit as st
 from utils.model_trainer import get_trained_model
 from utils.model_saver import auto_save_best_model, load_best_model
+import re
 
 def model_loader(best_model, best_metrics, model, metrics, label: str):
     """
@@ -40,6 +41,30 @@ def metrics(metrics, label: str):
     print(f"**Recall for {label}:** {metrics['Recall'] * 100:.2f}%")
     print(f"**F1 Score for {label}:** {metrics['F1 Score'] * 100:.2f}%\n")
 
+def highlight_words(text, words_to_highlight):
+    """
+    Highlights specified words in the text using HTML styling.
+
+    Parameters
+    ----------
+    - text: input text (comment)
+    - words_to_highlight: list of words to highlight
+
+    Returns
+    -------
+    - str: HTML string with highlighted words
+    """
+    words_to_highlight = set(w.lower() for w in words_to_highlight)
+    def clean_word(w):
+        return re.sub(r'[^\w]', '', w).lower()
+    highlighted = []
+    for word in text.split():
+        if clean_word(word) in words_to_highlight:
+            highlighted.append(f'<span class="highlight">{word}</span>')
+        else:
+            highlighted.append(word)
+    return ' '.join(highlighted)
+
 def main():
     css = """
     <style>
@@ -55,7 +80,7 @@ def main():
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         margin-bottom: 0.5em;
     }
-
+    
     /* Button styling */
     .stButton>button {
         background: linear-gradient(135deg, #667eea, #764ba2);
@@ -141,11 +166,11 @@ def main():
     }
     </style>
     """
-
+    
     st.markdown(css, unsafe_allow_html=True)
-
-    st.title("Toxic Comment Detector")
-    st.markdown("""
+    
+    st.sidebar.title("Toxic Comment Detector")
+    st.sidebar.markdown("""
     This application is using manual implementation of Bagging Algorithm with Naive Bayes Classifier for toxicity, abusing and provocation detection.
     """)
 
@@ -168,24 +193,62 @@ def main():
     metrics(metricsAbusive, "IsAbusive")
     print("-----------------------------------")
 
-    st.markdown("---")
-    st.subheader("Check your comment")
-    comment = st.text_area("Write the comment you want to check:", height=100)
-    if st.button("Evaluate"):
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("Check your comment")
+    comment = st.sidebar.text_area("Write the comment you want to check:", height=100)
+    if st.sidebar.button("Evaluate"):
         if comment.strip() == "":
             st.error("Please write comment")
         else:
-            predictionToxic = modelToxic.predict([comment])
-            predictionProvocative = modelProvocative.predict([comment])
-            predictionAbusive = modelAbusive.predict([comment])
-            if predictionToxic[0] == 1 or predictionToxic[0] == "1":
-                st.error("Commect is **TOXIC** :rotating_light:")   
+            predictionToxic = modelToxic.predict([comment])[0]
+            predictionProvocative = modelProvocative.predict([comment])[0]
+            predictionAbusive = modelAbusive.predict([comment])[0]
+
+            st.write("## Comment Analysis")
+            
+            if predictionToxic == 1 or predictionAbusive == 1 or predictionProvocative == 1:
+                st.write("The comment has been classified as:")
+                if predictionToxic == 1 or predictionToxic == "1":
+                    st.write("- TOXIC")
+                if predictionAbusive == 1 or predictionAbusive == "1":
+                    st.write("- ABUSIVE")
+                if predictionProvocative == 1 or predictionProvocative == "1":
+                    st.write("- PROVOCATIVE")
             else:
-                st.success("Comment **is not toxic** :white_check_mark:")
-            if predictionAbusive[0] == 1 or predictionAbusive[0] == "1":
-                st.error("Commect is **ABUSIVE** :rotating_light:")
-            if predictionProvocative[0] == 1 or predictionProvocative[0] == "1":
-                st.error("Commect is **PROVOCATIVE** :rotating_light:")
+                st.write("The comment is not toxic, abusive, or provocative.")
+            
+            if predictionToxic == 1 or predictionToxic == "1":
+                st.write("### Toxicity Analysis")
+                toxic_words = modelToxic.get_contributing_words(comment)
+                highlighted_comment = highlight_words(comment, toxic_words)
+                st.write("The comment is **TOXIC**")
+                #st.markdown(highlighted_comment, unsafe_allow_html=True)
+                st.write("Contributing words:", ", ".join(toxic_words))
+
+            if predictionAbusive == 1 or predictionAbusive == "1":
+                st.write("### Abusiveness Analysis")
+                abusive_words = modelAbusive.get_contributing_words(comment)
+                highlighted_comment = highlight_words(comment, abusive_words)
+                st.write("The comment is **ABUSIVE**")
+                #st.markdown(highlighted_comment, unsafe_allow_html=True)
+                st.write("Contributing words:", ", ".join(abusive_words))
+
+            if predictionProvocative == 1 or predictionProvocative == "1":
+                st.write("### Provocativeness Analysis")
+                provocative_words = modelProvocative.get_contributing_words(comment)
+                highlighted_comment = highlight_words(comment, provocative_words)
+                st.write("The comment is **PROVOCATIVE**")
+                #st.markdown(highlighted_comment, unsafe_allow_html=True)
+                st.write("Contributing words:", ", ".join(provocative_words))
+
+            #if predictionToxic[0] == 1 or predictionToxic[0] == "1":
+            #    st.error("Commect is **TOXIC** :rotating_light:")   
+            #else:
+            #    st.success("Comment **is not toxic** :white_check_mark:")
+            #if predictionAbusive[0] == 1 or predictionAbusive[0] == "1":
+            #    st.error("Commect is **ABUSIVE** :rotating_light:")
+            #if predictionProvocative[0] == 1 or predictionProvocative[0] == "1":
+            #    st.error("Commect is **PROVOCATIVE** :rotating_light:")
 
 
 if __name__ == '__main__':

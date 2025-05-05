@@ -32,6 +32,16 @@ class BaggingClassifier:
         """
         return self.base_estimator()
 
+    # Inside bagging.py, add this method to the BaggingClassifier class
+    def get_contributing_words(self, text, positive_class=1):
+        words = self.estimators[0].tokenize(text)
+        contributing = []
+        for word in set(words):
+            count = sum(1 for est in self.estimators if est._log_prob(word, positive_class) > est._log_prob(word, 1 - positive_class))
+            if count > len(self.estimators) / 2:
+                contributing.append(word)
+        return contributing
+
     def fit(self, X, y):
         """
         Natrénuje bagging klasifikátor na trénovacích dátach X a y.

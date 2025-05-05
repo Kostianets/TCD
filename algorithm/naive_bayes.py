@@ -25,6 +25,14 @@ class SimpleNaiveBayesClassifier:
         self.total_words = {}        # celkový počet slov v každej triede
         self.vocab = set()           # množina unikátnych slov vo všetkých dokumentoch
 
+    # Inside naive_bayes.py, add this method to the SimpleNaiveBayesClassifier class
+    def _log_prob(self, word, label):
+        if label not in self.word_counts:
+            return math.log(self.alpha / (self.total_words.get(label, 0) + self.alpha * len(self.vocab)))
+        word_count = self.word_counts[label].get(word, 0)
+        total_words_label = self.total_words[label]
+        return math.log((word_count + self.alpha) / (total_words_label + self.alpha * len(self.vocab)))
+
     def tokenize(self, text):
         """
         Tokenizácia textu: prevod na malé písmená, odstránenie interpunkcie a rozdelenie podľa medzier.
